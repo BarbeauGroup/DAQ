@@ -423,7 +423,24 @@ void convertData( TString inputFilename, TString outputPath ){
 
 }
 
+//This can be supplied with a .txt file listing multiple binary files. 
+void processMultipleFiles( TString inputFilename, TString pathToOutputFiles ){
 
+  //Step through the .txt file, processing as we go.
+  ifstream file( inputFilename );
+  string line;
+  TString lineTString;
+  Int_t lineNum = 0;
+  while( file.good() ){
+	if (getline ( file, line, '\n' )){
+		lineTString = line;
+		cout << "Processing file " << line << endl;
+		convertData( lineTString, pathToOutputFiles );
+	}
+  }
+
+  cout << "Routine complete, exiting." << endl;
+}
 
 
 
